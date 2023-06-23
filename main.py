@@ -6,9 +6,9 @@ data = pd.read_csv("waste_data.csv")
 # Group the data by waste type and calculate the total quantity
 grouped_data = data.groupby("Waste Type").agg({"Quantity": "sum"}).reset_index()
 
-# Debugging code: print out the grouped data and its shape
+"""# Debugging code: print out the grouped data and its shape
 print(grouped_data)
-print(grouped_data.shape)
+print(grouped_data.shape)"""
 
 # Calculate the total waste quantity
 total_waste = grouped_data["Quantity"].sum()
