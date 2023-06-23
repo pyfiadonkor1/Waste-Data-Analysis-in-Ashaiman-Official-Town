@@ -1,14 +1,11 @@
 import pandas as pd
+import matplotlib.pyplot as plt
 
 # Read the waste data from the CSV file
 data = pd.read_csv("waste_data.csv")
 
 # Group the data by waste type and calculate the total quantity
 grouped_data = data.groupby("Waste Type").agg({"Quantity": "sum"}).reset_index()
-
-"""# Debugging code: print out the grouped data and its shape
-print(grouped_data)
-print(grouped_data.shape)"""
 
 # Calculate the total waste quantity
 total_waste = grouped_data["Quantity"].sum()
@@ -27,3 +24,18 @@ print("Plastic Waste Percentage:", plastic_waste["Percentage"].values[0])
 
 # Save the analysis to a new CSV file
 grouped_data.to_csv("waste_analysis.csv", index=False)
+
+# Create a bar chart
+bar_chart_data = data.groupby(["Date", "Waste Type"]).agg({"Quantity": "sum"}).reset_index()
+bar_chart_data.pivot(index="Date", columns="Waste Type", values="Quantity").plot(kind="bar", stacked=True)
+plt.xlabel("Date")
+plt.ylabel("Quantity")
+plt.title("Waste Collected by Date and Type")
+plt.legend(title="Waste Type")
+plt.show()
+
+"""# Create a pie chart
+grouped_data.plot(kind="pie", y="Percentage", autopct="%.1f%%", labels=grouped_data["Waste Type"],
+            legend=False, title="Total Waste Quantity by Type")
+plt.ylabel("")
+plt.show()"""
