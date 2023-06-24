@@ -25,7 +25,7 @@ print("Plastic Waste Percentage:", plastic_waste["Percentage"].values[0])
 #store analysis in new CSV file
 grouped_data.to_csv("waste_analysis.csv", index=False)
 
-#A Bar Chart represenration of data
+#A Bar Chart representation of data
 bar_chart_data = data.groupby(["Date", "Waste Type"]).agg({"Quantity": "sum"}).reset_index()
 bar_chart_data.pivot(index="Date", columns="Waste Type", values="Quantity").plot(kind="bar", stacked=True)
 plt.xlabel("Date")
@@ -34,7 +34,7 @@ plt.title("Waste Collected by Date and Type")
 plt.legend(title="Waste Type")
 plt.show()
 
-#A Pie Chart represenration of data
+#A Pie Chart representation of data
 grouped_data.plot(kind="pie", y="Percentage", autopct="%.1f%%", labels=grouped_data["Waste Type"],
             legend=False, title="Total Waste Quantity by Type")
 plt.ylabel("")
